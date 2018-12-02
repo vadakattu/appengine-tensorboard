@@ -27,15 +27,6 @@ RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 # Update the package list and install the Cloud SDK
 RUN  apt-get update && apt-get install -y google-cloud-sdk
 
-
-# Install oauth2_proxy
-WORKDIR /usr/local
-RUN curl https://storage.googleapis.com/golang/go1.7.3.linux-amd64.tar.gz | tar xzv
-RUN apt-get update && apt-get install -y git
-ENV GOPATH /var/go
-ENV PATH $PATH:/usr/local/go/bin:/var/go/bin
-RUN go get github.com/bitly/oauth2_proxy
-
 WORKDIR /
 ADD run_tensorboard.sh /run_tensorboard.sh
 RUN chmod u+x /run_tensorboard.sh
